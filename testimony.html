@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonies</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .feed-card {
+      background: #1a1a1a;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border-left: 4px solid red;
+    }
+
+    .name {
+      font-weight: bold;
+      color: red;
+      margin-bottom: 5px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🙏 Testimonies</h1>
+</header>
+
+<div class="container">
+
+  <!-- SUBMIT SECTION -->
+  <div class="card">
+    <h3>Share Your Testimony</h3>
+
+    <input id="name" placeholder="Your Name">
+    <textarea id="message" placeholder="Your testimony..."></textarea>
+
+    <button class="btn" onclick="addTestimony()">Submit</button>
+  </div>
+
+  <!-- DISPLAY SECTION -->
+  <div id="list"></div>
+
+</div>
+
+<script>
+  // 🔥 SAMPLE TESTIMONIES (you can replace later with Firebase)
+  let testimonies = [
+    {
+      name: "Anonymous",
+      message: "God healed me from anxiety during prayer."
+    },
+    {
+      name: "Member",
+      message: "I found direction in my life through this ministry."
+    },
+    {
+      name: "Youth",
+      message: "I stopped struggling after joining discipleship."
+    }
+  ];
+
+  // 📌 DISPLAY FUNCTION
+  function render() {
+    let html = "";
+
+    testimonies.forEach(t => {
+      html += `
+        <div class="feed-card">
+          <div class="name">${t.name}</div>
+          <div>${t.message}</div>
+        </div>
+      `;
+    });
+
+    document.getElementById("list").innerHTML = html;
+  }
+
+  // ➕ ADD NEW TESTIMONY
+  function addTestimony() {
+    let name = document.getElementById("name").value;
+    let message = document.getElementById("message").value;
+
+    if (!name || !message) {
+      alert("Please fill all fields");
+      return;
+    }
+
+    testimonies.unshift({
+      name: name,
+      message: message
+    });
+
+    document.getElementById("name").value = "";
+    document.getElementById("message").value = "";
+
+    render();
+  }
+
+  // 🚀 LOAD ON START
+  render();
+</script>
+
+</body>
+  </html>
